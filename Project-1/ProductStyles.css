@@ -1,0 +1,126 @@
+ .navbar {
+     background-color: #333;
+     color: white;
+     padding: 15px 10px;
+     justify-content: space-evenly;
+     border-radius: 10px;
+ }
+
+ .navbar a {
+     color: white;
+     font-size: 24px;
+     padding: 20px 30px;
+     text-decoration: none;
+ }
+
+ .grid {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     /* grid-gap: 10px; */
+ }
+
+ .box {
+     background-color: #f0f0f0;
+     border: 1px solid #ccc;
+     padding: 10px;
+     height: 400px;
+     text-align: center;
+     position: relative;
+ }
+
+ .box img {
+     width: 100%;
+     height: 80%;
+     object-fit: cover;
+     cursor: pointer;
+ }
+
+ .details {
+     position: absolute;
+     bottom: 10px;
+     left: 10px;
+     right: 10px;
+     font-size: 16px;
+ }
+
+ .price {
+     margin-bottom: 5px;
+     font-size: 20px;
+     font-weight: 500;
+ }
+
+ .rating {
+     color: darkgreen;
+     font-size: 20px;
+     font-weight: 500;
+ }
+
+ /* Modal Styling */
+ .modal {
+     display: none;
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.8);
+     justify-content: center;
+     align-items: center;
+ }
+
+ .modal-content {
+     background-color: white;
+     padding: 20px;
+     width: 500px;
+     text-align: left;
+     border-radius: 10px;
+     animation: fadeIn 0.3s;
+ }
+
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+     }
+
+     to {
+         opacity: 1;
+     }
+ }
+
+ .modal img {
+     width: 70%;
+     height: auto;
+     /* margin-bottom: 20px; */
+ }
+
+ .close {
+     float: right;
+     font-size: 30px;
+     font-weight: bold;
+     cursor: pointer;
+     background-color: royalblue;
+     color: white;
+     text-align: center;
+     width: 50px;
+ }
+
+ button {
+     height: 50px;
+     width: 150px;
+     background-color: lightgreen;
+     color: darkblue;
+     font-size: 1.2em;
+     font-weight: 700;
+     cursor: pointer;
+     border-radius: 5px;
+ }
+
+ button:hover {
+     background-color: green;
+     color: white;
+ }
+
+ .close:hover {
+     background-color: red;
+     color: white;
+ }

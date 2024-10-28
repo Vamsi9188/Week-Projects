@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Card Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: powderblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            color: blue;
+            margin: 0;
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .difficulty-levels {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .difficulty-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s;
+        }
+
+        .difficulty-btn.active {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .game-grid {
+            display: grid;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .card {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card .front,
+        .card .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .card .front {
+            background-color: #800080;
+            color: #fff;
+        }
+
+        .card .back {
+            background-color: #f0f0f0;
+            transform: rotateY(180deg);
+            color: #000;
+        }
+
+        .game-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .start-btn {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .start-btn:hover {
+            background-color: red;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .card {
+                width: 60px;
+                height: 60px;
+            }
+
+            .difficulty-btn {
+                padding: 8px 15px;
+            }
+
+            .game-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Memory Card Game</h1>
+    </header>
+    <main>
+        <div class="game-container">
+            <div class="game-grid" id="game-grid"></div>
+            <div class="game-info">
+                <p>Attempts: <span id="attempts">0</span></p>
+                <p>Time: <span id="time">00:00</span></p>
+            </div>
+            <button class="start-btn" onclick="startGame()">Start Game</button>
+        </div>
+        <div class="difficulty-levels">
+            <button id="easy" class="difficulty-btn active" onclick="setDifficulty('easy')">Easy</button>
+            <button id="medium" class="difficulty-btn" onclick="setDifficulty('medium')">Medium</button>
+            <button id="hard" class="difficulty-btn" onclick="setDifficulty('hard')">Hard</button>
+        </div>
+    </main>
+    <script>
+        let gameGrid;
+        let cards;
+        let attempts = 0;
+        let time = 0;
+        let timer;
+        let difficultyLevel = 'easy';
+        let cardsFlipped = [];
+        let matchedPairs = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            gameGrid = document.getElementById('game-grid');
+            setDifficulty('easy');
+        });
+
+        function setDifficulty(level) {
+            difficultyLevel = level;
+            document.querySelectorAll('.difficulty-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(level).classList.add('active');
+
+            const gridSize = level === 'easy' ? 4 : level === 'medium' ? 4 : 5;
+            gameGrid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+        }
+
+        function startGame() {
+            clearInterval(timer);
+            gameGrid.innerHTML = '';
+            attempts = 0;
+            time = 0;
+            cardsFlipped = [];
+            matchedPairs = 0;
+            document.getElementById('attempts').textContent = attempts;
+            document.getElementById('time').textContent = '00:00';
+
+            const cardPairs = difficultyLevel === 'easy' ? 4 : difficultyLevel === 'medium' ? 8 : 10;
+            cards = [];
+            for (let i = 1; i <= cardPairs; i++) {
+                cards.push({ id: i, content: String.fromCharCode(64 + i) }, { id: i, content: String.fromCharCode(64 + i) });
+            }
+
+            cards = shuffleArray(cards);
+
+            cards.forEach((card) => {
+                const cardElement = document.createElement('div');
+                cardElement.classList.add('card');
+                cardElement.innerHTML = `
+                    <div class="front"></div>
+                    <div class="back">${card.content}</div>
+                `;
+                gameGrid.appendChild(cardElement);
+
+                cardElement.addEventListener('click', () => {
+                    flipCard(cardElement, card);
+                });
+            });
+
+            timer = setInterval(() => {
+                time++;
+                document.getElementById('time').textContent = formatTime(time);
+            }, 1000);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function flipCard(cardElement, card) {
+            if (cardsFlipped.length < 2 && !cardElement.classList.contains('flipped')) {
+                cardElement.classList.add('flipped');
+                cardsFlipped.push({ card, element: cardElement });
+
+                if (cardsFlipped.length === 2) {
+                    checkMatch();
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [first, second] = cardsFlipped;
+            if (first.card.id === second.card.id) {
+                matchedPairs++;
+                if (matchedPairs === cards.length / 2) {
+                    clearInterval(timer);
+                    setTimeout(() => alert(`You won! Attempts: ${attempts}, Time: ${formatTime(time)}`), 500);
+                }
+                cardsFlipped = [];
+            } else {
+                setTimeout(() => {
+                    first.element.classList.remove('flipped');
+                    second.element.classList.remove('flipped');
+                    cardsFlipped = [];
+                }, 1000);
+            }
+            attempts++;
+            document.getElementById('attempts').textContent = attempts;
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const sec = seconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+        }
+    </script>
+</body>
+
+</html>

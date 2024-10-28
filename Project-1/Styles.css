@@ -1,0 +1,327 @@
+  /* General Styles */
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+  }
+  .container
+  {
+      display: flex;
+      flex-wrap: wrap;
+      /* justify-content: space-between; */
+      margin: 20px;
+      /* border:2px solid; */
+  }
+  .first
+  {
+      background-color: lightskyblue;
+      height: 800px;
+      width: 600px;
+      border: 2px solid blue;
+      border-radius: 5px;
+      flex-basis: 48%;
+      border-right:none;
+  }
+  .second
+  {
+      background-color: lightpink;
+      border: 2px solid blue;
+      border-radius: 5px;
+      flex-basis: 48%;
+      height: 800px;
+      width: 600px;
+      border-left: none;
+  }
+  .product-container {
+      text-align: center;
+  }
+  /* Image Zoom Animation */
+  .image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      margin-top: 50px;
+      transition: transform 0.5s ease;
+  }
+  .image-wrapper:hover {
+      transform: scale(1.1);
+  }
+  /* Product Details */
+  .product-details {
+      transition: opacity 0.5s ease;
+  }
+  /* Fade Effect for Details */
+  .product-details.fade-out {
+      opacity: 0;
+  }
+  .product-details.fade-in {
+      opacity: 1;
+  }
+  /* Quantity Selector */
+  .quantity-selector
+  {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .increase-decrease
+  {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+  }
+  #increase_quantity
+  {
+      background-color: blue;
+      color: white;
+      font-size: 1.5em;
+      font-weight: 600;
+      margin: auto 5px;
+      width: 50px;
+  }
+  #decrease_quantity
+  {
+      background-color: red;
+      color: white;
+      font-size: 1.5em;
+      font-weight: 600;
+      margin: auto 5px;
+      width: 50px;
+  }
+  input[type='number']
+  {
+      background-color: #333;
+      color: white;
+      font-size: 1.5em;
+      font-weight: 900;
+      text-align: center;
+  }
+  .increase-decrease button
+  {
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #f0f0f0;
+      cursor: pointer;
+  }
+  .increase-decrease button:hover 
+  {
+      background-color: #ccc;
+  }
+  #quantity_input
+  {
+      width: 50px;
+      height: 30px;
+      font-size: 16px;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+  #stock_message
+  {
+      font-size: 17px;
+      color: #000000;
+      margin-top: 5px;
+      text-align: center;
+  }
+  .CartMessage
+  {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  #cart_message
+  {
+      font-size: 17px;
+      color: #000000;
+      margin-bottom: 10px;
+      text-align: center;
+  }
+  #add_to_cart
+  {
+      background-color: lightgreen;
+      color: darkslateblue;
+      height: 40px;
+      width: 150px;
+      font-size: 1.2em;
+      font-weight: bold;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+  }
+  #add_to_cart:hover
+  {
+      background-color: #3e8e41;
+      color: white;
+  }
+  /* Reviews Section */
+  .reviews-container
+  {
+      padding: 20px;
+      border-top: 1px solid #ccc;
+  }
+  /* Reviews List */
+  .review-item
+  {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+  }
+
+  @keyframes fadeIn
+  {
+      from {
+          opacity: 0;
+      }
+
+      to {
+          opacity: 1;
+      }
+  }
+  /* Modal */
+  .modal
+  {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+  }
+  .modal-content
+  {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+  }
+  .close
+  {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+  }
+  .close:hover,.close:focus
+  {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+  }
+  /* Responsive Design */
+  @media screen and (max-width: 500px)
+  {
+      .image-wrapper {
+          max-width: 100%;
+      }
+  }
+  @media (max-width: 600px) 
+  {
+      .container {
+          flex-direction: column;
+      }
+      .first,.second {
+          flex-basis: 10%;
+      }
+  }
+  .variant-selection
+  {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .variant-selection section
+  {
+      margin-bottom: 20px;
+      width: 100%;
+  }
+  .variant-selection label
+  {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #333;
+  }
+  .variant-selection select
+  {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+  }
+  /* Filter Options */
+  .filter-options
+  {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .filter-options section
+  {
+      flex-basis: 45%;
+  }
+  .filter-options label
+  {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #333;
+  }
+  .filter-options select
+  {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+  }
+  #open_modal_button
+  {
+      width: 150px;
+      height: 50px;
+      font-size: 01.1em;
+      font-weight: bold;
+      border: 2px solid black;
+      border-radius: 10px;
+      margin-top: 20px;
+      background-color: lightgreen;
+      color: darkslateblue;
+      cursor: pointer;
+  }
+  #open_modal_button:hover
+  {
+      background-color: #3e8e41;
+      color: white;
+  }

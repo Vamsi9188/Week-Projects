@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-skyblue text-gray-800 p-6">
+
+    <!-- Login Page -->
+    <div id="login-page" class="max-w-md mx-auto mt-20 bg-green-100 p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold text-center mb-4 text-blue-600">Login</h2>
+        <form id="login-form" class="space-y-4">
+            <div>
+                <label for="username" class="block text-sm font-medium text-brown-800">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required
+                    class="w-full p-2 border rounded">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-brown-800">Password</label>
+                <div class="relative">
+                    <input type="password" id="password" placeholder="Enter your password" required
+                        class="w-full p-2 border rounded">
+                    <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 px-3 py-2">
+                        <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="flex justify-between">
+                <button type="submit"
+                    class="bg-green-500 font-bold py-2 px-4 rounded hover:bg-green-600 w-1/2 mx-1">Login</button>
+                <button type="button" id="cancel-button"
+                    class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 w-1/2 mx-1">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Main App Page -->
+    <div id="app-page" class="hidden">
+        <header class="bg-green-500 text-white py-3 px-3 text-center rounded-lg max-w-md mx-auto">
+            <h1 class="text-xl font-bold">Personal Finance Tracker</h1>
+            <button id="logout-button" class="mt-2 bg-red-500 py-1 px-3 rounded hover:bg-red-600">Logout</button>
+        </header>
+
+        <div class="max-w-4xl mx-auto mt-8">
+            <!-- Budget Setting Section -->
+            <section class="bg-red-200 p-6 rounded-lg shadow-md mb-6">
+                <h2 class="text-xl font-semibold text-center mb-4">Set Monthly Budget</h2>
+                <form id="budget-form" class="space-y-4">
+                    <div>
+                        <label for="income" class="block text-sm font-medium">Monthly Income</label>
+                        <input type="number" id="income" placeholder="Enter your income" required
+                            class="w-full p-2 border rounded">
+                    </div>
+                    <div>
+                        <label for="budget-expense" class="block text-sm font-medium">Monthly Expense Limit</label>
+                        <input type="number" id="budget-expense" placeholder="Enter your expense target" required
+                            class="w-full p-2 border rounded">
+                    </div>
+                    <div class="flex justify-center">
+                        <button type="submit"
+                            class="bg-green-500 text-white text-center font-bold py-2 px-4 rounded hover:bg-green-600">Set
+                            Budget</button>
+                    </div>
+                </form>
+
+                <div id="budget-summary" class="mt-4 text-lg">
+                    <p>Income: ₹ <span id="total-income">0</span></p>
+                    <p>Expense Target: ₹ <span id="expense-target">0</span></p>
+                    <p>Savings Goal: ₹ <span id="savings-goal">0</span></p>
+                </div>
+            </section>
+
+            <!-- Income and Expense Logging Section -->
+            <section class="bg-red-200 p-6 rounded-lg shadow-md mb-6">
+                <h2 class="text-xl font-semibold text-center mb-4">Log Income/Expenses</h2>
+                <form id="log-form" class="space-y-4">
+                    <div>
+                        <label for="category" class="block text-sm font-medium">Category</label>
+                        <select id="category" class="w-full p-2 border rounded">
+                            <option value="income">Income</option>
+                            <option value="food">Food</option>
+                            <option value="rent">Rent</option>
+                            <option value="tax">Tax</option>
+                            <option value="donation">Donation</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="transport">Transport</option>
+                            <option value="pets">Pets</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="amount" class="block text-sm font-medium">Amount</label>
+                        <input type="number" id="amount" placeholder="Enter amount" required
+                            class="w-full p-2 border rounded">
+                    </div>
+                    <div>
+                        <label for="date" class="block text-sm font-medium">Date</label>
+                        <input type="date" id="date" required class="w-full p-2 border rounded">
+                    </div>
+                    <div class="flex justify-center">
+                        <button type="submit"
+                            class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600">Add
+                            Entry</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Overview Section -->
+            <section class="bg-red-200 p-6 rounded-lg shadow-md mb-6">
+                <h2 class="text-xl font-semibold text-center mb-4">Financial Overview</h2>
+                <div class="text-lg">
+                    <p>Total Income: ₹ <span id="display-income">0</span></p>
+                    <p>Total Expenses: ₹ <span id="display-expenses">0</span></p>
+                    <p>Current Savings: ₹ <span id="display-savings">0</span></p>
+                </div>
+                <canvas id="expense-chart" class="mt-6 mx-auto" width="400" height="400"></canvas>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        let income = 0;
+        let expenseTarget = 0;
+        let totalIncome = 0;
+        let totalExpenses = 0;
+        let categoryExpenses = {
+            food: 0, rent: 0, tax: 0, donation: 0, utilities: 0,
+            transport: 0, pets: 0, healthcare: 0, entertainment: 0, others: 0
+        };
+        let currentChart = null;
+
+        window.onload = () => {
+            loadFromStorage();
+            updateOverview();
+        };
+
+        document.getElementById("login-form").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent form submission and page reload
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // Check if the username starts with a capital letter
+    const usernameRegex = /^[A-Z][a-zA-Z]*$/;
+    // Check if the password meets the requirements: starts with a capital letter, contains at least one special character, and is at least 8 characters long
+    const passwordRegex = /^(?=.*[!@#$%^&*])[A-Z][a-zA-Z0-9!@#$%^&*]{7,}$/;
+
+    if (!usernameRegex.test(username)) {
+        alert("Username must start with a capital letter.");
+    } else if (!passwordRegex.test(password)) {
+        alert("Password must start with a capital letter, contain at least one special character, and be at least 8 characters long.");
+    } else {
+        // Store the username in local storage
+        localStorage.setItem("username", username);
+        // Hide login page and show app page
+        document.getElementById("login-page").classList.add("hidden");
+        document.getElementById("app-page").classList.remove("hidden");
+    }
+});
+
+
+        document.getElementById("toggle-password").addEventListener("click", function () {
+            const passwordInput = document.getElementById("password");
+            const eyeIcon = document.getElementById("eye-icon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18M15 12l-3-3m0 0l-3 3m3-3v12"/>`;
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12l-3-3m0 0l-3 3m3-3v12m0 0l3-3m-3 3l-3-3"/>`;
+            }
+        });
+
+        document.getElementById("cancel-button").addEventListener("click", function () {
+            document.getElementById("username").value = '';
+            document.getElementById("password").value = '';
+        });
+
+        document.getElementById("budget-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            income = parseFloat(document.getElementById("income").value);
+            expenseTarget = parseFloat(document.getElementById("budget-expense").value);
+            totalIncome += income;
+            updateBudgetSummary();
+            saveToStorage();
+            updateOverview();
+        });
+
+        document.getElementById("log-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const category = document.getElementById("category").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+
+            if (category !== "income") {
+                totalExpenses += amount;
+                categoryExpenses[category] += amount;
+            } else {
+                totalIncome += amount;
+            }
+
+            updateOverview();
+            saveToStorage();
+        });
+
+        document.getElementById("logout-button").addEventListener("click", function () {
+            localStorage.removeItem("username");
+            window.location.reload();
+        });
+
+        function loadFromStorage() {
+            const storedUsername = localStorage.getItem("username");
+            if (storedUsername) {
+                document.getElementById("login-page").classList.add("hidden");
+                document.getElementById("app-page").classList.remove("hidden");
+            }
+        }
+
+        function updateBudgetSummary() {
+            document.getElementById("total-income").textContent = income.toFixed(2);
+            document.getElementById("expense-target").textContent = expenseTarget.toFixed(2);
+            document.getElementById("savings-goal").textContent = (income - expenseTarget).toFixed(2);
+        }
+
+        function updateOverview() {
+            document.getElementById("display-income").textContent = totalIncome.toFixed(2);
+            document.getElementById("display-expenses").textContent = totalExpenses.toFixed(2);
+            document.getElementById("display-savings").textContent = (totalIncome - totalExpenses).toFixed(2);
+            updateChart();
+        }
+
+        function updateChart() {
+            const ctx = document.getElementById("expense-chart").getContext("2d");
+            const labels = Object.keys(categoryExpenses);
+            const data = Object.values(categoryExpenses);
+            const colors = data.map(() => '#' + Math.floor(Math.random() * 16777215).toString(16));
+
+            if (currentChart) {
+                currentChart.destroy();
+            }
+
+            currentChart = new Chart(ctx, {
+                type: "pie",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: colors,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                }
+            });
+        }
+
+        function saveToStorage() {
+            const dataToSave = {
+                totalIncome: totalIncome,
+                totalExpenses: totalExpenses,
+                categoryExpenses: categoryExpenses,
+            };
+            localStorage.setItem("financeData", JSON.stringify(dataToSave));
+        }
+    </script>
+
+</body>
+
+</html>

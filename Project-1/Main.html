@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce Project</title>
+    <!-- <link rel="stylesheet" href="one.css" /> -->
+    <style>
+      body {
+        background-color: lightsalmon;
+      }
+      .navbar {
+        background-color: #333;
+        color: white;
+        padding: 15px 10px;
+        justify-content: space-evenly;
+        border-radius: 10px;
+        a {
+          color: white;
+          font-size: 24px;
+          padding: 20px 30px;
+          text-decoration: none;
+        }
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 10px;
+        width: 400px;
+        height: 400px;
+        margin-top: 20px;
+      }
+
+      .box {
+        background-color: #ccc;
+        border: 1px solid #666;
+        padding: 20px;
+        height: 300px;
+        width: 300px;
+      }
+      img {
+        height: 300px;
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="Main.html">Home</a>
+      <a href="Products.html">Products</a>
+      <a href="Carts.html">Carts</a>
+    </div>
+    <div class="grid">
+      <div class="box">
+        <img src="images/electronicGadgets.jpeg" />
+      </div>
+      <div class="box">
+        <img src="images/cloths.jpeg" alt="" srcset="" />
+      </div>
+      <div class="box">
+        <img src="images/beautyProducts.jpeg" alt="" srcset="" />
+      </div>
+      <div class="box">
+        <img src="images/KitchenImage.jpeg" alt="" srcset="" />
+      </div>
+      <div class="box"><img src="images/Books.jpeg" /></div>
+      <div class="box"><img src="images/Toys.jpeg" /></div>
+      <div class="box"><img src="images/Furniture.jpeg" /></div>
+      <div class="box"><img src="images/Jewellery.jpeg" /></div>
+    </div>
+    <!--  
+    <script>
+      const grid = document.createElement("div");
+      grid.className = "grid";
+
+      for (let i = 0; i < 4; i++) {
+        const box = document.createElement("div");
+        box.className = "box";
+        grid.appendChild(box);
+      }
+
+      document.body.appendChild(grid);
+    </script>
+    -->
+  </body>
+</html>

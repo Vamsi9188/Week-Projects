@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <link rel="stylesheet" href='Styles.css'>
+  </head>
+  <body>
+    <section class="container">
+        <section class="first">
+        <div class="product-container" id="product_section">
+            <div class="image-wrapper">
+                <img src="images/T-Shirts.jpeg" alt="Product" class="product-image" id="product_image" height="250px" width="300px" />
+            </div>
+        <button id="open_modal_button">View in Modal</button>
+        <div class="product-details">
+            <h2 id="product_description">Classic Red T-shirt</h2>
+            <p id="product_price">$100.00</p>
+            <div class="variant-selection">
+                <section class="color">
+                    <label for="color">Color:</label>
+                    <select id="color" name="color">
+                        <option value="red" selected>Red</option>
+                        <option value="blue">Blue</option>
+                        <option value="green">Green</option>
+                    </select>
+                </section>
+                <section class="size">
+                    <label for="size">Size:</label>
+                    <select id="size" name="size">
+                        <option value="small">Small</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </section>
+                <section class="material">
+                    <label for="material">Material:</label>
+                    <select id="material" name="material">
+                        <option value="cotton" selected>Cotton</option>
+                        <option value="polyester">Polyester</option>
+                        <option value="wool">Wool</option>
+                    </select>
+                </section>
+            </div>
+    </section>
+       <section class="second">
+            <div class="quantity-selector">
+                <section class="increase-decrease">
+                    <button id="decrease_quantity">-</button>
+                    <input type="number" id="quantity_input" value="1" min="1" max="10" />
+                    <button id="increase_quantity">+</button>
+                </section>
+                    <p id="stock_message"></p>
+                <section class="CartMessage">
+                    <button id="add_to_cart">Add to Cart</button>
+                    <p id="cart_message"></p>
+                </section>
+            </div>
+      <div class="reviews-container" id="reviews_section">
+        <h3 style="text-align: center;">Customer Reviews</h3>
+        <div class="filter-options">
+            <section class="rating">
+                <label for="filter_rating">Filter by Rating:</label>
+                <select id="filter_rating">
+                    <option value="all">All Ratings</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Star</option>
+                </select>
+            </section>
+            <section class="date">
+                <label for="filter_date">Sort by Date:</label>
+                <select id="filter_date">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                </select>
+            </section>
+        </div>
+        </div>
+            <div id="reviews_list"></div>
+    </div>
+    <div id="image_modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal_image" />
+        <div id="caption"></div>
+    </div>
+</section>
+</section>
+    <!-- <script src="Script.js"> -->
+    </script>
+  </body>
+</html>

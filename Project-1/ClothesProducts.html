@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clothes Products</title>
+    <link rel="stylesheet" href="ProductStyles.css" />
+  </head>
+  <body bgcolor="lightgreen">
+    <div class="navbar">
+      <a href="ElectronicProducts.html">Electronic Products</a>
+      <a href="ClothesProducts.html">Clothes Products</a>
+      <a href="BeautyProducts.html">Beauty Products</a>
+      <a href="KitchenProducts.html">Kitchen Products</a>
+      <a href="Main.html">Home</a>
+    </div>
+
+    <div class="grid">
+      <!-- Product 1 -->
+      <div class="box">
+        <img
+          src="images/Clothes/Towels.jpeg"
+          alt="Baby Girl Dress"
+          onclick="openModal('Towels', 'images/Clothes/Towels.jpeg', 25, 'Pink', 'Small', 'BrandA', 10)"
+        />
+        <div class="details">
+          <div class="price">$25</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="box">
+        <img
+          src="images/Clothes/Kerchief.jpeg"
+          alt="Summer Dress"
+          onclick="openModal('Hand Kerchief', 'images/Clothes/Kerchief.jpeg', 45, 'Blue', 'Medium', 'BrandB', 20)"
+        />
+        <div class="details">
+          <div class="price">$45</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="box">
+        <img
+          src="images/Clothes/Lungi.jpeg"
+          alt="Lungi"
+          onclick="openModal('Lungi', 'images/Clothes/Lungi.jpeg', 15, 'Green', 'Large', 'BrandC', 50)"
+        />
+        <div class="details">
+          <div class="price">$15</div>
+          <div class="rating">★★★☆☆</div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="box">
+        <img
+          src="images/Clothes/Pants.jpeg"
+          alt="Formal Pants"
+          onclick="openModal('Formal Pants', 'images/Clothes/Pants.jpeg', 40, 'Black', 'Large', 'BrandD', 30)"
+        />
+        <div class="details">
+          <div class="price">$40</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="box">
+        <img
+          src="images/Clothes/Saree.jpeg"
+          alt="Saree"
+          onclick="openModal('Saree', 'images/Clothes/Saree.jpeg', 60, 'Red', 'One Size', 'BrandE', 20)"
+        />
+        <div class="details">
+          <div class="price">$60</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="box">
+        <img
+          src="images/Clothes/shirts.jpeg"
+          alt="Casual Shirt"
+          onclick="openModal('Casual Shirt', 'images/Clothes/shirts.jpeg', 30, 'White', 'Medium', 'BrandF', 40)"
+        />
+        <div class="details">
+          <div class="price">$30</div>
+          <div class="rating">★★★☆☆</div>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="box">
+        <img
+          src="images/Clothes/suite.jpeg"
+          alt="Business Suit"
+          onclick="openModal('Business Suit', 'images/Clothes/suite.jpeg', 120, 'Navy Blue', 'Large', 'BrandG', 10)"
+        />
+        <div class="details">
+          <div class="price">$120</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="box">
+        <img
+          src="images/Clothes/Shorts.jpeg"
+          alt="Summer Shorts"
+          onclick="openModal('Summer Shorts', 'images/Clothes/Shorts.jpeg', 20, 'Yellow', 'Small', 'BrandH', 50)"
+        />
+        <div class="details">
+          <div class="price">$20</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for displaying product details -->
+    <div id="productModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="productName"></h2>
+        <img id="productImage" src="" alt="Product Image" />
+        <p><strong>Price:</strong> $<span id="productPrice"></span></p>
+        <p><strong>Color:</strong> <span id="productColor"></span></p>
+        <p><strong>Size:</strong> <span id="productSize"></span></p>
+        <p><strong>Company:</strong> <span id="productCompany"></span></p>
+        <p><strong>Quantity:</strong> <span id="productQuantity"></span></p>
+        <button onclick="addToCart()">Add to Cart</button>
+      </div>
+    </div>
+    <script>
+      // Function to open the modal and display product details
+      function openModal(name, imgSrc, price, color, size, company, quantity) {
+        document.getElementById("productName").innerText = name;
+        document.getElementById("productImage").src = imgSrc;
+        document.getElementById("productPrice").innerText = price;
+        document.getElementById("productColor").innerText = color;
+        document.getElementById("productSize").innerText = size;
+        document.getElementById("productCompany").innerText = company;
+        document.getElementById("productQuantity").innerText = quantity;
+        document.getElementById("productModal").style.display = "flex";
+      }
+
+      // Function to close the modal
+      function closeModal() {
+        document.getElementById("productModal").style.display = "none";
+      }
+
+      // Function to add the item to the cart
+      function addToCart() {
+        const item = {
+          name: document.getElementById("productName").innerText,
+          price: parseFloat(document.getElementById("productPrice").innerText),
+          color: document.getElementById("productColor").innerText,
+          size: document.getElementById("productSize").innerText,
+          company: document.getElementById("productCompany").innerText,
+          quantity: parseInt(
+            document.getElementById("productQuantity").innerText
+          ), // Use actual quantity
+          image: document.getElementById("productImage").src,
+        };
+
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        cartItems.push(item);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+        alert("Item added to cart!");
+      }
+    </script>
+  </body>
+</html>

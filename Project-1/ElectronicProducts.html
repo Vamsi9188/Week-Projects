@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electronic Products</title>
+    <link rel="stylesheet" href="ProductStyles.css" />
+  </head>
+  <body bgcolor="teal">
+    <div class="navbar">
+      <a href="ElectronicProducts.html">Electronic Products</a>
+      <a href="ClothesProducts.html">Clothes Products</a>
+      <a href="BeautyProducts.html">Beauty Products</a>
+      <a href="KitchenProducts.html">Kitchen Products</a>
+      <a href="Main.html">Home</a>
+    </div>
+
+    <div class="grid">
+      <!-- Product 1: Camera -->
+      <div class="box">
+        <img
+          src="images/Electronics/Camera.jpeg"
+          alt="Camera"
+          onclick="openModal('Camera', 'images/Electronics/Camera.jpeg', 300, 'Canon', '12MP', '1 year warranty', 5)"
+        />
+        <div class="details">
+          <div class="price">$300</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Product 2: Charger -->
+      <div class="box">
+        <img
+          src="images/Electronics/Charger.jpeg"
+          alt="Charger"
+          onclick="openModal('Charger', 'images/Electronics/Charger.jpeg', 25, 'Anker', 'Fast Charging', '6 months warranty', 20)"
+        />
+        <div class="details">
+          <div class="price">$25</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+
+      <!-- Product 3: Earbuds -->
+      <div class="box">
+        <img
+          src="images/Electronics/earBirds.jpeg"
+          alt="Earbuds"
+          onclick="openModal('Earbuds', 'images/Electronics/earBirds.jpeg', 50, 'Sony', 'Wireless', '1 year warranty', 15)"
+        />
+        <div class="details">
+          <div class="price">$50</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+
+      <!-- Product 4: Ear Speaker -->
+      <div class="box">
+        <img
+          src="images/Electronics/vivoY200e5g.jpeg"
+          alt="Vivo Mobile"
+          onclick="openModal('Vivo Mobile','images/Electronics/vivoY200e5g.jpeg', 80, 'Vivo', 'Mobile Phone', '2 years warranty', 10)"
+        />
+        <div class="details">
+          <div class="price">$80</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Product 5: Fridge -->
+      <div class="box">
+        <img
+          src="images/Electronics/Fridge.jpeg"
+          alt="Fridge"
+          onclick="openModal('Fridge', 'images/Electronics/Fridge.jpeg', 500, 'LG', 'Double Door', '5 years warranty', 3)"
+        />
+        <div class="details">
+          <div class="price">$500</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Product 6: Grinder -->
+      <div class="box">
+        <img
+          src="images/Electronics/Grainder.jpeg"
+          alt="Grinder"
+          onclick="openModal('Grinder', 'images/Electronics/Grainder.jpeg', 70, 'Philips', '500W Power', '1 year warranty', 8)"
+        />
+        <div class="details">
+          <div class="price">$70</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+
+      <!-- Product 7: Laptop -->
+      <div class="box">
+        <img
+          src="images/Electronics/Laptop.jpeg"
+          alt="Laptop"
+          onclick="openModal('Laptop', 'images/Electronics/Laptop.jpeg', 1000, 'Dell', '16GB RAM, 512GB SSD', '3 years warranty', 4)"
+        />
+        <div class="details">
+          <div class="price">$1000</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Product 8: Smart Watch -->
+      <div class="box">
+        <img
+          src="images/Electronics/smartWatch.jpeg"
+          alt="Smart Watch"
+          onclick="openModal('Smart Watch', 'images/Electronics/smartWatch.jpeg', 150, 'Apple', 'Fitness Tracker', '2 years warranty', 12)"
+        />
+        <div class="details">
+          <div class="price">$150</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for displaying product details -->
+    <div id="productModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <center>
+          <h2 id="productName"></h2>
+          <img id="productImage" src="" alt="Product Image" />
+          <p><strong>Price:</strong> $<span id="productPrice"></span></p>
+          <p><strong>Brand:</strong> <span id="productBrand"></span></p>
+          <p>
+            <strong>Specifications:</strong> <span id="productSpecs"></span>
+          </p>
+          <p><strong>Warranty:</strong> <span id="productWarranty"></span></p>
+          <p><strong>Quantity:</strong> <span id="productQuantity"></span></p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </center>
+      </div>
+    </div>
+
+    <script>
+      function openModal(
+        name,
+        imgSrc,
+        price,
+        brand,
+        specs,
+        warranty,
+        quantity
+      ) {
+        document.getElementById("productName").innerText = name;
+        document.getElementById("productImage").src = imgSrc;
+        document.getElementById("productPrice").innerText = price;
+        document.getElementById("productBrand").innerText = brand;
+        document.getElementById("productSpecs").innerText = specs;
+        document.getElementById("productWarranty").innerText = warranty;
+        document.getElementById("productQuantity").innerText = quantity;
+        document.getElementById("productModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("productModal").style.display = "none";
+      }
+
+      function addToCart() {
+        const item = {
+          name: document.getElementById("productName").innerText,
+          brand: document.getElementById("productBrand").innerText,
+          specifications: document.getElementById("productSpecs").innerText,
+          warranty: document.getElementById("productWarranty").innerText,
+          price: parseFloat(document.getElementById("productPrice").innerText),
+          quantity: parseInt(
+            document.getElementById("productQuantity").innerText
+          ),
+          image: document.getElementById("productImage").src, // Assuming there's an image element with this ID
+        };
+
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        cartItems.push(item);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+        alert("Product added to cart!");
+      }
+    </script>
+  </body>
+</html>

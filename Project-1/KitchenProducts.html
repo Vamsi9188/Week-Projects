@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kitchen Products</title>
+    <link rel="stylesheet" href="ProductStyles.css" />
+  </head>
+  <body bgcolor="orange">
+    <div class="navbar">
+      <a href="ElectronicProducts.html">Electronic Products</a>
+      <a href="ClothesProducts.html">Clothes Products</a>
+      <a href="BeautyProducts.html">Beauty Products</a>
+      <a href="KitchenProducts.html">Kitchen Products</a>
+      <a href="Main.html">Home</a>
+    </div>
+
+    <div class="grid">
+      <!-- First Product -->
+      <div class="box">
+        <img
+          src="images/Kitchen/Cooker.jpeg"
+          alt="Cooker"
+          onclick="openModal('Cooker', 'images/Kitchen/Cooker.jpeg', 200, 'Black', 'Large', 'ABC', 10)"
+        />
+        <div class="details">
+          <div class="price">$200</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+
+      <!-- Second Product -->
+      <div class="box">
+        <img
+          src="images/Kitchen/Glasses.jpeg"
+          alt="Glasses"
+          onclick="openModal('Glasses', 'images/Kitchen/Glasses.jpeg', 50, 'Transparent', 'Medium', 'XYZ', 25)"
+        />
+        <div class="details">
+          <div class="price">$50</div>
+          <div class="rating">★★★☆☆</div>
+        </div>
+      </div>
+
+      <!-- Third Product -->
+      <div class="box">
+        <img
+          src="images/Kitchen/lighter.jpeg"
+          alt="Lighter"
+          onclick="openModal('Lighter', 'images/Kitchen/lighter.jpeg', 15, 'Silver', 'Small', 'BrandX', 100)"
+        />
+        <div class="details">
+          <div class="price">$15</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+
+      <!-- Fourth Product -->
+      <div class="box">
+        <img
+          src="images/Kitchen/lunchBox.jpeg"
+          alt="Lunch Box"
+          onclick="openModal('Lunch Box', 'images/Kitchen/lunchBox.jpeg', 25, 'Blue', 'Medium', 'BrandY', 50)"
+        />
+        <div class="details">
+          <div class="price">$25</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Fifth Product -->
+      <div class="box">
+        <img
+          src="images/Kitchen/Mixee.jpeg"
+          alt="Mixer"
+          onclick="openModal('Mixer', 'images/Kitchen/Mixee.jpeg', 120, 'Red', 'Large', 'BrandZ', 5)"
+        />
+        <div class="details">
+          <div class="price">$120</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+
+      <!-- Sixth Product -->
+      <div class="box">
+        <img
+          src="images/Kitchen/Stove.jpeg"
+          alt="Stove"
+          onclick="openModal('Stove', 'images/Kitchen/Stove.jpeg', 300, 'Black', 'Medium', 'BrandA', 20)"
+        />
+        <div class="details">
+          <div class="price">$300</div>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+
+      <!-- Seventh Product -->
+      <div class="box">
+        <img
+          src="images/Kitchen/Vessel.jpeg"
+          alt="Vessel"
+          onclick="openModal('Vessel', 'images/Kitchen/Vessel.jpeg', 80, 'Silver', 'Large', 'BrandB', 15)"
+        />
+        <div class="details">
+          <div class="price">$80</div>
+          <div class="rating">★★★☆☆</div>
+        </div>
+      </div>
+
+      <!-- Eighth Product -->
+      <div class="box">
+        <img
+          src="images/Kitchen/Plates.jpeg"
+          alt="Plates"
+          onclick="openModal('Plates', 'images/Kitchen/Plates.jpeg', 40, 'White', 'Small', 'BrandC', 100)"
+        />
+        <div class="details">
+          <div class="price">$40</div>
+          <div class="rating">★★★★☆</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for displaying product details -->
+    <div id="productModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="productName"></h2>
+        <img id="productImage" src="" alt="Product Image" />
+        <p><strong>Price:</strong> $<span id="productPrice"></span></p>
+        <p><strong>Color:</strong> <span id="productColor"></span></p>
+        <p><strong>Size:</strong> <span id="productSize"></span></p>
+        <p><strong>Company:</strong> <span id="productCompany"></span></p>
+        <p><strong>Quantity:</strong> <span id="productQuantity"></span></p>
+        <button onclick="addToCart()">Add to Cart</button>
+      </div>
+    </div>
+
+    <script>
+      function openModal(name, imgSrc, price, color, size, company, quantity) {
+        document.getElementById("productName").innerText = name;
+        document.getElementById("productImage").src = imgSrc;
+        document.getElementById("productPrice").innerText = price;
+        document.getElementById("productColor").innerText = color;
+        document.getElementById("productSize").innerText = size;
+        document.getElementById("productCompany").innerText = company;
+        document.getElementById("productQuantity").innerText = quantity;
+        document.getElementById("productModal").style.display = "flex";
+      }
+
+      function closeModal() {
+        document.getElementById("productModal").style.display = "none";
+      }
+
+      function addToCart() {
+        const item = {
+          name: document.getElementById("productName").innerText,
+          price: parseFloat(document.getElementById("productPrice").innerText),
+          quantity:
+            parseInt(document.getElementById("productQuantity").value) || 1, // Default to 1 if quantity is not set
+          image: document.getElementById("productImage").src,
+        };
+
+        // Retrieve existing cart items or create a new array if none exist
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+        // Push the new item into the cart
+        cartItems.push(item);
+
+        // Save the updated cart back to local storage
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+
+        // Notify the user that the product has been added
+        alert("Product added to cart!");
+      }
+    </script>
+  </body>
+</html>
