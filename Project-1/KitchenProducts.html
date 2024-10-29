@@ -21,7 +21,7 @@
         <img
           src="images/Kitchen/Cooker.jpeg"
           alt="Cooker"
-          onclick="openModal('Cooker', 'images/Kitchen/Cooker.jpeg', 200, 'Black', 'Large', 'ABC', 10)"
+          onclick="openModal('Cooker', 'images/Kitchen/Cooker.jpeg', 200, 'Black', 'Large', '2 years warranty', 10)"
         />
         <div class="details">
           <div class="price">$200</div>
@@ -34,7 +34,7 @@
         <img
           src="images/Kitchen/Glasses.jpeg"
           alt="Glasses"
-          onclick="openModal('Glasses', 'images/Kitchen/Glasses.jpeg', 50, 'Transparent', 'Medium', 'XYZ', 25)"
+          onclick="openModal('Glasses', 'images/Kitchen/Glasses.jpeg', 50, 'Transparent', 'Medium', '3 years warranty', 25)"
         />
         <div class="details">
           <div class="price">$50</div>
@@ -47,7 +47,7 @@
         <img
           src="images/Kitchen/lighter.jpeg"
           alt="Lighter"
-          onclick="openModal('Lighter', 'images/Kitchen/lighter.jpeg', 15, 'Silver', 'Small', 'BrandX', 100)"
+          onclick="openModal('Lighter', 'images/Kitchen/lighter.jpeg', 15, 'Silver', 'Small', '2 years warranty', 100)"
         />
         <div class="details">
           <div class="price">$15</div>
@@ -60,7 +60,7 @@
         <img
           src="images/Kitchen/lunchBox.jpeg"
           alt="Lunch Box"
-          onclick="openModal('Lunch Box', 'images/Kitchen/lunchBox.jpeg', 25, 'Blue', 'Medium', 'BrandY', 50)"
+          onclick="openModal('Lunch Box', 'images/Kitchen/lunchBox.jpeg', 25, 'Blue', 'Medium', '2 years warranty', 50)"
         />
         <div class="details">
           <div class="price">$25</div>
@@ -73,7 +73,7 @@
         <img
           src="images/Kitchen/Mixee.jpeg"
           alt="Mixer"
-          onclick="openModal('Mixer', 'images/Kitchen/Mixee.jpeg', 120, 'Red', 'Large', 'BrandZ', 5)"
+          onclick="openModal('Mixer', 'images/Kitchen/Mixee.jpeg', 120, 'Red', 'Large', '2 years warranty', 5)"
         />
         <div class="details">
           <div class="price">$120</div>
@@ -86,7 +86,7 @@
         <img
           src="images/Kitchen/Stove.jpeg"
           alt="Stove"
-          onclick="openModal('Stove', 'images/Kitchen/Stove.jpeg', 300, 'Black', 'Medium', 'BrandA', 20)"
+          onclick="openModal('Stove', 'images/Kitchen/Stove.jpeg', 300, 'Black', 'Medium', '2 years warranty', 20)"
         />
         <div class="details">
           <div class="price">$300</div>
@@ -99,7 +99,7 @@
         <img
           src="images/Kitchen/Vessel.jpeg"
           alt="Vessel"
-          onclick="openModal('Vessel', 'images/Kitchen/Vessel.jpeg', 80, 'Silver', 'Large', 'BrandB', 15)"
+          onclick="openModal('Vessel', 'images/Kitchen/Vessel.jpeg', 80, 'Silver', 'Large', '2 years warranty', 15)"
         />
         <div class="details">
           <div class="price">$80</div>
@@ -112,7 +112,7 @@
         <img
           src="images/Kitchen/Plates.jpeg"
           alt="Plates"
-          onclick="openModal('Plates', 'images/Kitchen/Plates.jpeg', 40, 'White', 'Small', 'BrandC', 100)"
+          onclick="openModal('Plates', 'images/Kitchen/Plates.jpeg', 40, 'White', 'Small', '2 years warranty', 100)"
         />
         <div class="details">
           <div class="price">$40</div>
@@ -125,25 +125,37 @@
     <div id="productModal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h2 id="productName"></h2>
-        <img id="productImage" src="" alt="Product Image" />
-        <p><strong>Price:</strong> $<span id="productPrice"></span></p>
-        <p><strong>Color:</strong> <span id="productColor"></span></p>
-        <p><strong>Size:</strong> <span id="productSize"></span></p>
-        <p><strong>Company:</strong> <span id="productCompany"></span></p>
-        <p><strong>Quantity:</strong> <span id="productQuantity"></span></p>
-        <button onclick="addToCart()">Add to Cart</button>
+        <center>
+          <h2 id="productName"></h2>
+          <img id="productImage" src="" alt="Product Image" />
+          <p><strong>Price:</strong> $<span id="productPrice"></span></p>
+          <p><strong>Brand:</strong> <span id="productBrand"></span></p>
+          <p>
+            <strong>Specifications:</strong> <span id="productSpecs"></span>
+          </p>
+          <p><strong>Warranty:</strong> <span id="productWarranty"></span></p>
+          <p><strong>Quantity:</strong> <span id="productQuantity"></span></p>
+          <button onclick="addToCart()">Add to Cart</button>
+        </center>
       </div>
     </div>
 
     <script>
-      function openModal(name, imgSrc, price, color, size, company, quantity) {
+      function openModal(
+        name,
+        imgSrc,
+        price,
+        brand,
+        specs,
+        warranty,
+        quantity
+      ) {
         document.getElementById("productName").innerText = name;
         document.getElementById("productImage").src = imgSrc;
         document.getElementById("productPrice").innerText = price;
-        document.getElementById("productColor").innerText = color;
-        document.getElementById("productSize").innerText = size;
-        document.getElementById("productCompany").innerText = company;
+        document.getElementById("productBrand").innerText = brand;
+        document.getElementById("productSpecs").innerText = specs;
+        document.getElementById("productWarranty").innerText = warranty;
         document.getElementById("productQuantity").innerText = quantity;
         document.getElementById("productModal").style.display = "flex";
       }
@@ -155,24 +167,23 @@
       function addToCart() {
         const item = {
           name: document.getElementById("productName").innerText,
+          brand: document.getElementById("productBrand").innerText,
+          specifications: document.getElementById("productSpecs").innerText,
+          warranty: document.getElementById("productWarranty").innerText,
           price: parseFloat(document.getElementById("productPrice").innerText),
-          quantity:
-            parseInt(document.getElementById("productQuantity").value) || 1, // Default to 1 if quantity is not set
-          image: document.getElementById("productImage").src,
+          quantity: parseInt(
+            document.getElementById("productQuantity").innerText
+          ),
+          image: document.getElementById("productImage").src, // Assuming there's an image element with this ID
         };
 
-        // Retrieve existing cart items or create a new array if none exist
         let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-        // Push the new item into the cart
         cartItems.push(item);
-
-        // Save the updated cart back to local storage
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
-        // Notify the user that the product has been added
         alert("Product added to cart!");
       }
     </script>
+
   </body>
 </html>
